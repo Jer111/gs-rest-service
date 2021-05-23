@@ -13,7 +13,7 @@ public class Controller {
 
 	public void print() {
 		for (RythmGroup track : grouplist) {
-			System.out.printf("TracK: %s, Rythm: %s, users:\n", track.getRythmName(), track.getRythm());
+			System.out.printf("Track: %s, Rythm: %s, users:\n", track.getRythmName(), track.getRythm());
 			for (User u : track.getUsers()) {
 				System.out.println(u.getName() + " " + u.getScore());
 			}
@@ -45,7 +45,10 @@ public class Controller {
 				} else {
 					for (User u : track.getUsers()) { // else replace the score if higher.
 						if (name.equals(u.getName())) {
-							u.setScore(Integer.parseInt(score));
+							if (u.getScore() < Integer.parseInt(score)){
+								u.setScore(Integer.parseInt(score));
+							}
+							
 						}
 					}
 					break;
@@ -56,33 +59,38 @@ public class Controller {
 		return user;
 	}
 
+	/*The following function takes a http request and makes a group out of that. */
 	@GetMapping("/group")
 	public RythmGroup rythmGroup(@RequestParam(value = "rythmname", defaultValue = "") String rythmname,
 			@RequestParam(value = "rythm", defaultValue = "") String rythm) {
 
 		RythmGroup mygroup = new RythmGroup(rythmname, rythm);
 		boolean exists = false;
+		//check if the group already exists
 		for (RythmGroup track : grouplist) {
 			if (rythmname.equals(track.getRythmName())) {
 				exists = true;
 				break;
 			}
 		}
-		if (!exists) {
+		if (!exists) { //if it not exists: add to the list.
 			grouplist.add(mygroup);
 		}
 		print();
 		return mygroup;
 	}
-
+	/* The following function takes a http request with a group name in it, and returns the scoreboard of that group in the body.*/
 	@GetMapping("/scoreboard")
 	public Scoreboard scoreboard(@RequestParam(value = "rythmname") String rythmname) {
 		Scoreboard name = new Scoreboard();
+		//check if the group exists
 		for (RythmGroup track : grouplist) {
+			System.err.println(track.getRythmName() + rythmname);
 			if (track.getRythmName().equals(rythmname)) {
-				name = new Scoreboard(track);
+				name = new Scoreboard(track); //make a scoreboard for that group.
+				break;
 			}
-			break;
+			
 		}
 
 		return name;
