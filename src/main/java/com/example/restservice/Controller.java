@@ -61,8 +61,8 @@ public class Controller {
 
 	/*The following function takes a http request and makes a group out of that. */
 	@GetMapping("/group")
-	public RythmGroup rythmGroup(@RequestParam(value = "rythmname", defaultValue = "test") String rythmname,
-			@RequestParam(value = "rythm", defaultValue = "empty") String rythm) {
+	public RythmGroup rythmGroup(@RequestParam(value = "rythmname", defaultValue = "") String rythmname,
+			@RequestParam(value = "rythm", defaultValue = "") String rythm) {
 
 		RythmGroup mygroup = new RythmGroup(rythmname, rythm);
 		boolean exists = false;
