@@ -97,6 +97,7 @@ public class Controller {
 
 	}
 
+	//This function takes a grouprythm and return the rythm in the body.
 	@GetMapping("/rythm")
 	public String getRythm(@RequestParam(value = "group") String group){
 		for (RythmGroup track :grouplist){
