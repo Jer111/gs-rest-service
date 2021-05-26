@@ -97,4 +97,14 @@ public class Controller {
 
 	}
 
+	@GetMapping("/rythm")
+	public String getRythm(@RequestParam(value = "group") String group){
+		for (RythmGroup track :grouplist){
+			if (track.getRythmName().equals(group)){
+				return track.getRythm();
+			}
+		}
+		return null;
+	}
+
 }
