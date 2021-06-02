@@ -2,6 +2,7 @@ package com.example.restservice;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "Users")
@@ -13,6 +14,8 @@ public class User {
 	private final String name;
 	@Column(name = "score")
 	private int xscore;
+	@Id
+	private long id;
 	
 
 	public User(String name, int score) {
