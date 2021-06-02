@@ -1,18 +1,18 @@
 package com.example.restservice;
 
 public class Scoreboard {
-    private RhythmGroup group;
+    //private RhythmGroup group;
 
     public Scoreboard(){
 
     }
 
-    public Scoreboard(RhythmGroup rhythmname){
-        this.group = rhythmname;
-    }
+    //public Scoreboard(RhythmGroup rhythmname){
+        //this.group = rhythmname;
+    //}
 
-    public RhythmGroup getGroup(){
-        return group;
-    }
+    //public RhythmGroup getGroup(){
+       // return group;
+   // }
 
 }
