@@ -1,0 +1,6 @@
+target/rest-service-0.0.1-SNAPSHOT.jar
+.project
+.classpath
+.gradle
+.settings
+target
