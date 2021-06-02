@@ -100,7 +100,7 @@ public class Controller {
 		//return name;
 
 		String result = "";
-		for (User user:repository.findByGroupName(rhythmname)){
+		for (User user:repository.findByName(rhythmname)){
 			result += user.toString() + "";
 		}
 		return result;
