@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.example.restservice.GreetingControllerTests
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 4.423 s <<< FAILURE! - in com.example.restservice.GreetingControllerTests
+noParamGreetingShouldReturnDefaultMessage  Time elapsed: 0.674 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at com.example.restservice.GreetingControllerTests.noParamGreetingShouldReturnDefaultMessage(GreetingControllerTests.java:40)
+
+paramGreetingShouldReturnTailoredMessage  Time elapsed: 0.224 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at com.example.restservice.GreetingControllerTests.paramGreetingShouldReturnTailoredMessage(GreetingControllerTests.java:48)
+

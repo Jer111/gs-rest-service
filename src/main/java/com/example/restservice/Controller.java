@@ -1,7 +1,7 @@
 package com.example.restservice;
 
 import java.util.*;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,14 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
-	@Autowired
-	UserRepository repository;
-
-	private List<RhythmGroup> grouplist = new ArrayList<>();
+	private List<RythmGroup> grouplist = new ArrayList<>();
 
 	public void print() {
-		for (RhythmGroup track : grouplist) {
-			System.out.printf("Track: %s, rhythm: %s, users:\n", track.getRhythmName(), track.getRhythm());
+		for (RythmGroup track : grouplist) {
+			System.out.printf("Track: %s, Rythm: %s, users:\n", track.getRythmName(), track.getRythm());
 			for (User u : track.getUsers()) {
 				System.out.println(u.getName() + " " + u.getScore());
 			}
@@ -34,8 +31,8 @@ public class Controller {
 			@RequestParam(value = "score", defaultValue = "0") String score) {
 		User user = new User(name, Integer.parseInt(score));
 		// çheck if group is in the list with groups.
-		for (RhythmGroup track : grouplist) {
-			if (group.equals(track.getRhythmName())) {
+		for (RythmGroup track : grouplist) {
+			if (group.equals(track.getRythmName())) {
 				boolean exists = false;
 				for (User u : track.getUsers()) {// check if their is not a duplicate user.
 					if (name.equals(u.getName())) {
@@ -44,7 +41,6 @@ public class Controller {
 					}
 				}
 				if (!exists) {
-					repository.save(user);
 					track.addUser(user);// if there is not a duplicate add the user.
 				} else {
 					for (User u : track.getUsers()) { // else replace the score if higher.
@@ -65,14 +61,14 @@ public class Controller {
 
 	/*The following function takes a http request and makes a group out of that. */
 	@GetMapping("/group")
-	public RhythmGroup rhythmGroup(@RequestParam(value = "rhythmname", defaultValue = "") String rhythmname,
-			@RequestParam(value = "rhythm", defaultValue = "") String rhythm) {
+	public RythmGroup rythmGroup(@RequestParam(value = "rythmname", defaultValue = "") String rythmname,
+			@RequestParam(value = "rythm", defaultValue = "") String rythm) {
 
-		RhythmGroup mygroup = new RhythmGroup(rhythmname, rhythm);
+		RythmGroup mygroup = new RythmGroup(rythmname, rythm);
 		boolean exists = false;
 		//check if the group already exists
-		for (RhythmGroup track : grouplist) {
-			if (rhythmname.equals(track.getRhythmName())) {
+		for (RythmGroup track : grouplist) {
+			if (rythmname.equals(track.getRythmName())) {
 				exists = true;
 				break;
 			}
@@ -85,29 +81,20 @@ public class Controller {
 	}
 	/* The following function takes a http request with a group name in it, and returns the scoreboard of that group in the body.*/
 	@GetMapping("/scoreboard")
-	public String scoreboard(@RequestParam(value = "rhythmname") String rhythmname) {
-		//Scoreboard name = new Scoreboard();
+	public Scoreboard scoreboard(@RequestParam(value = "rythmname") String rythmname) {
+		Scoreboard name = new Scoreboard();
 		//check if the group exists
-		//for (RhythmGroup track : grouplist) {
-			//System.err.println(track.getRhythmName() + rhythmname);
-		//	if (track.getRhythmName().equals(rhythmname)) {
-				//name = new Scoreboard(track); //make a scoreboard for that group.
-			//	break;
-			//}
+		for (RythmGroup track : grouplist) {
+			System.err.println(track.getRythmName() + rythmname);
+			if (track.getRythmName().equals(rythmname)) {
+				name = new Scoreboard(track); //make a scoreboard for that group.
+				break;
+			}
 			
-		//}
-
-		//return name;
-
-		String result = "";
-		for (User user:repository.findByName(rhythmname)){
-			result += user.toString() + "";
 		}
-		return result;
+
+		return name;
+
 	}
 
-	
-	
-
-	
 }

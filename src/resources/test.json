@@ -1,6 +1,6 @@
 {
     "group": {
-        "rhythm": "hoofdschouderknieenteen",
+        "rythm": "hoofdschouderknieenteen",
         "users": [
             {
                 "name": "klaas",
@@ -11,7 +11,7 @@
                 "score": 2234
             }
         ],
-        "rhythmName": "track7"
+        "rythmName": "track7"
     },
     "users": [
         {
