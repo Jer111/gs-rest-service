@@ -97,4 +97,17 @@ public class Controller {
 
 	}
 
+	@GetMapping("/rythm")
+	public String scoreboard(@RequestParam(value = "rythmname") String rythmname) {
+		
+		String rhythm = "";
+		for (RythmGroup group: grouplist){
+			if (group.getRythmName().equals(rythmname)){
+				rhythm = group.getRythm();
+			}
+		}
+		return rhythm;
+
+	}
+
 }
