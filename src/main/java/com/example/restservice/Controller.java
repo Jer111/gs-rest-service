@@ -98,16 +98,13 @@ public class Controller {
 	}
 
 	@GetMapping("/rythm")
-	public String rhythm(@RequestParam(value = "rythmname") String rythmname) {
-		
-		String rhythm = "";
-		for (RythmGroup group: grouplist){
-			if (group.getRythmName().equals(rythmname)){
-				rhythm = group.getRythm();
+	public String getRythm(@RequestParam(value = "group") String group){
+		for (RythmGroup track :grouplist){
+			if (track.getRythmName().equals(group)){
+				return track.getRythm();
 			}
 		}
-		return rhythm;
-
+		return null;
 	}
 
 }
